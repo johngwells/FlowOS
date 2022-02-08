@@ -1,8 +1,8 @@
-import data from '../data/bug-tracker';
+// import data from '../data/bug-tracker';
 import styles from './card.module.css';
 import cls from 'classnames';
 
-const Card = () => {
+const Card = ({ data }) => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Bug Reports</h2>
@@ -13,7 +13,7 @@ const Card = () => {
         <span className={styles.borderSmall}>Status</span>
         <span className={styles.borderSmall}>Assigned to</span>
       </div>
-      {data.map(d => {
+      {data.links.map(d => {
         return (
           <div className={styles.card}>
             <div className={cls(styles.border, styles.borderTitle)}>

@@ -1,9 +1,33 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import client from '../lib/apollo-client';
+import { gql } from '@apollo/client';
 
 import Card from '../components/card';
 
-export default function Home() {
+export async function getServerSideProps() {
+  const { data } = await client.query({
+    query: gql`
+      query GetData {
+        links {
+          title
+          reporter
+          severity
+          status
+          devAssigned
+        }
+      }
+    `
+  });
+
+  return {
+    props: {
+      data
+    }
+  };
+}
+
+export default function Home({data}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -20,7 +44,7 @@ export default function Home() {
           <img src='static/flow.png' className={styles.flowImg}></img>
           <h1 className={styles.title}>Flow.OS</h1>
         </div>
-        <Card />
+        <Card data={data}/>
       </main>
     </div>
   );
