@@ -1,29 +1,26 @@
-// Create the shape of the dummy data for the Bug Tracker
-// Person logged in submitting will be the reporter
-// Dev assigned - will click to assign themselves & the users image will display on that table. 
 [
   {
-    id: 1,
-    title: 'Mobile app loading time',
-    reporter: 'Bilbo',
-    severity: ['Low', 'Mid', 'High'],
-    status: ['New', 'Dev Needed', 'In progress'],
-    devAssigned: 'User 1'
+    "id": 1,
+    "title": "Mobile app loading time",
+    "reporter": "Bilbo",
+    "severity": ["Low", "Mid", "High"],
+    "status": ["New", "Dev Needed", "In progress"],
+    "devAssigned": "Assigned - 'JW'"
   },
   {
-    id: 2,
-    title: 'Broken link in footer',
-    reporter: 'Froto',
-    severity: ['Low', 'Mid', 'High'],
-    status: ['New', 'Dev Needed', 'In progress'],
-    devAssigned: 'User 2'
+    "id": 2,
+    "title": "Broken link in footer",
+    "reporter": "Froto",
+    "severity": ["Low", "Mid", "High"],
+    "status": ["New", "Dev Needed", "In progress"],
+    "devAssigned": "Assigned - 'JW'"
   },
   {
-    id: 3,
-    title: 'Dropdown issues for users',
-    reporter: 'Sam',
-    severity: ['Low', 'Mid', 'High'],
-    status: ['New', 'Dev Needed', 'In progress'],
-    devAssigned: 'User 3'
+    "id": 3,
+    "title": "Dropdown issues for users",
+    "reporter": "Sam",
+    "severity": ["Low", "Mid", "High"],
+    "status": ["New", "Dev Needed", "In progress"],
+    "devAssigned": "Assigned - 'JW'"
   }
 ]

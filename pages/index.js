@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 
+import Card from '../components/card';
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -18,6 +20,7 @@ export default function Home() {
           <img src='static/flow.png' className={styles.flowImg}></img>
           <h1 className={styles.title}>Flow.OS</h1>
         </div>
+        <Card />
       </main>
     </div>
   );

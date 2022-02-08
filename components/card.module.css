@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+}
+
+.border {
+  padding: .5rem;
+  /* margin-right: 1rem; */
+  margin-bottom: .1rem;
+  border: 1px solid #2596be;
+}
+
+.borderTitle {
+  width: 30%
+}
+
+.borderSmall {
+  width: 15%;
+}
