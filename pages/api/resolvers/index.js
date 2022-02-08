@@ -1,0 +1,30 @@
+export const resolvers = {
+  Query: {
+    links: () => [
+      {
+        id: 1,
+        title: 'Mobile app loading time',
+        reporter: 'Bilbo',
+        severity: ['Low', 'Mid', 'High'],
+        status: ['New', 'Dev Needed', 'In progress'],
+        devAssigned: 'Assigned - JW'
+      },
+      {
+        id: 2,
+        title: 'Broken link in footer',
+        reporter: 'Froto',
+        severity: ['Low', 'Mid', 'High'],
+        status: ['New', 'Dev Needed', 'In progress'],
+        devAssigned: 'Assigned - JW'
+      },
+      {
+        id: 3,
+        title: 'Dropdown issues for users',
+        reporter: 'Sam',
+        severity: ['Low', 'Mid', 'High'],
+        status: ['New', 'Dev Needed', 'In progress'],
+        devAssigned: 'Assigned - JW'
+      }
+    ]
+  }
+};
