@@ -5,6 +5,14 @@ import cls from 'classnames';
 const Card = () => {
   return (
     <div className={styles.container}>
+      <h2 className={styles.title}>Bug Reports</h2>
+      <div className={styles.tableHeading}>
+        <span className={styles.borderTitle}>title</span>
+        <span className={styles.borderSmall}>Reporter</span>
+        <span className={styles.borderSmall}>Severity</span>
+        <span className={styles.borderSmall}>Status</span>
+        <span className={styles.borderSmall}>Assigned to</span>
+      </div>
       {data.map(d => {
         return (
           <div className={styles.card}>
