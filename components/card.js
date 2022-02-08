@@ -3,7 +3,6 @@ import styles from './card.module.css';
 import cls from 'classnames';
 
 const Card = () => {
-  console.log(data[0].title);
   return (
     <div className={styles.container}>
       {data.map(d => {
