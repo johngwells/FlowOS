@@ -7,11 +7,21 @@ const Card = ({ data }) => {
     <div className={styles.container}>
       <h2 className={styles.title}>Bug Reports</h2>
       <div className={styles.tableHeading}>
-        <span className={styles.borderTitle}>title</span>
-        <span className={styles.borderSmall}>Reporter</span>
-        <span className={styles.borderSmall}>Severity</span>
-        <span className={styles.borderSmall}>Status</span>
-        <span className={styles.borderSmall}>Assigned to</span>
+        <span className={cls(styles.borderTitle, styles.tableAlign)}>
+          title
+        </span>
+        <span className={cls(styles.borderSmall, styles.tableAlign)}>
+          Reporter
+        </span>
+        <span className={cls(styles.borderSmall, styles.tableAlign)}>
+          Severity
+        </span>
+        <span className={cls(styles.borderSmall, styles.tableAlign)}>
+          Status
+        </span>
+        <span className={cls(styles.borderSmall, styles.tableAlign)}>
+          Assigned to
+        </span>
       </div>
       {data.links.map(d => {
         return (
