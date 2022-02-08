@@ -5,7 +5,10 @@ import cls from 'classnames';
 const Card = ({ data }) => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Bug Reports</h2>
+      <div className={styles.titleContainer}>
+        <img src='static/bug.png' className={styles.bugImg} />
+        <h2 className={styles.title}>Bug Reports</h2>
+      </div>
       <div className={styles.tableHeading}>
         <span className={cls(styles.borderTitle, styles.tableAlign)}>
           title

@@ -1,9 +1,20 @@
 /* #FF45F2 */
 /* #4CDAED */
 
+.titleContainer {
+  display: flex;
+  align-items: center;
+  margin-left: 2%;
+}
+
 .title {
   padding: 1rem;
-  margin-left: 1%;
+}
+
+.bugImg {
+  width: auto;
+  height: 2rem;
+  margin-right: -.5rem;
 }
 
 .tableHeading {
@@ -14,7 +25,6 @@
 }
 
 .tableAlign {
-  /* padding: .5rem; */
   margin-right: .4rem;
   margin-bottom: .5rem;
 }
