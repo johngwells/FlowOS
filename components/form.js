@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { client } from '../lib/apollo-client';
 import styles from './form.module.css';
+import Card from './card';
+// import Card from './card';
 
 const CREATE_BUG = gql`
   mutation Mutation($title: String!, $reporter: String!) {
@@ -28,14 +30,9 @@ const Form = () => {
   const [reporter, setReporter] = useState('');
 
   const [createFields, { data, loading, error }] = useMutation(CREATE_BUG, {
-    client,
     notifyOnNetworkStatusChange: true,
-    refetchQueries: [
-      { query: READ_BUG}
-    ]
-  })
-
-  console.log({data})
+    refetchQueries: [{ query: READ_BUG }]
+  });
 
   if (loading) return 'Submitting';
   if (error) return `Submission error! ${error.message}`;
