@@ -1,33 +1,34 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import client from '../lib/apollo-client';
+import { client, useQuery } from '../lib/apollo-client';
 import { gql } from '@apollo/client';
 
 import Card from '../components/card';
+import { useEffect } from 'react';
 
-export async function getServerSideProps() {
-  const { data } = await client.query({
-    query: gql`
-      query GetData {
-        links {
-          title
-          reporter
-          severity
-          status
-          devAssigned
-        }
-      }
-    `
-  });
+const GET_ALL_QUERIES = gql`
+  query Query {
+    fields {
+      title
+      reporter
+    }
+  }
+`;
+
+export async function getSeverSideProps() {
+  const { error, loading, data } = await client.query(GET_ALL_QUERIES);
 
   return {
-    props: {
-      data
-    }
+    props: data
   };
 }
 
-export default function Home({data}) {
+
+export default function Home({ data }) {
+  // useEffect(() => {
+  //   console.log({ data })
+  // }, [data])
+  // console.log({ data });
   return (
     <div className={styles.container}>
       <Head>
@@ -44,7 +45,7 @@ export default function Home({data}) {
           <img src='static/flow.png' className={styles.flowImg}></img>
           <h1 className={styles.title}>Flow.OS</h1>
         </div>
-        <Card data={data}/>
+        <Card data={data} />
       </main>
     </div>
   );

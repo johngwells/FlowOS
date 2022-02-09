@@ -1,16 +1,26 @@
 import { gql } from 'apollo-server-micro';
+import { buildSchema } from 'graphql';
 
 export const typeDefs = gql`
-  type Link {
+  type Fields {
     id: ID
-    title: String
-    reporter: String
-    severity: [String]
-    status: [String]
-    devAssigned: String
+    title: String!
+    reporter: String!
   }
 
   type Query {
-    links: [Link]!
+    fields: [Fields]!
   }
-`;
+
+  input FieldsInput {
+    title: String!
+    reporter: String!
+    severity: [String]
+    status: [String]
+    devAssigned: String 
+  }
+
+  type Mutation {
+    createFields(title: String!, reporter: String!): Fields!
+  }
+`
