@@ -37,7 +37,6 @@ const Form = () => {
   };
 
   const handleSubmit = e => {
-    console.log('Submitted!', title, reporter, severity);
     e.preventDefault();
     createFields({
       variables: { input: { title, reporter, severity, status } }

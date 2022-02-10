@@ -3,6 +3,7 @@ import { gql } from '@apollo/client'
 export const GET_ALL_QUERIES = gql`
   query Query {
     fields {
+      id
       title
       reporter
       severity
@@ -25,6 +26,7 @@ export const CREATE_BUG = gql`
 export const READ_BUG = gql`
   query Query {
     fields {
+      id
       title
       reporter
       severity
@@ -32,5 +34,3 @@ export const READ_BUG = gql`
     }
   }
 `;
-
-console.log(CREATE_BUG);
