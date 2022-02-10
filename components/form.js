@@ -78,7 +78,6 @@ const Form = () => {
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
       <label htmlFor='title'>
-        Title:
         <input
           id='title'
           type='text'
@@ -89,7 +88,6 @@ const Form = () => {
         />
       </label>
       <label htmlFor='reporter'>
-        Reporter:
         <input
           id='reporter'
           type='text'
