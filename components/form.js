@@ -1,13 +1,21 @@
 import { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
-import { client } from '../lib/apollo-client';
+import { initializeApollo, addApolloState } from '../lib/apollo-next-client';
 import styles from './form.module.css';
-import Card from './card';
-// import Card from './card';
 
 const CREATE_BUG = gql`
-  mutation Mutation($title: String!, $reporter: String!, $severity: String!, $status: String!) {
-    createFields(title: $title, reporter: $reporter, severity: $severity, status: $status) {
+  mutation Mutation(
+    $title: String!
+    $reporter: String!
+    $severity: String!
+    $status: String!
+  ) {
+    createFields(
+      title: $title
+      reporter: $reporter
+      severity: $severity
+      status: $status
+    ) {
       title
       reporter
       severity
@@ -113,5 +121,18 @@ const Form = () => {
     </form>
   );
 };
+
+export async function getServerSideProps() {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: GET_ALL_QUERIES
+  });
+
+  return addApolloState(apolloClient, {
+    props: {},
+    revalidate: 1
+  });
+}
 
 export default Form;

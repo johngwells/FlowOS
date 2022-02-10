@@ -1,33 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import { initializeApollo, addApolloState } from '../lib/apollo-next-client';
-import { gql } from '@apollo/client';
 
 import Card from '../components/card';
-
-const GET_ALL_QUERIES = gql`
-  query Query {
-    fields {
-      title
-      reporter
-      severity
-      status
-    }
-  }
-`;
-
-export async function getStaticProps() {
-  const apolloClient = initializeApollo()
-
-  await apolloClient.query({
-    query: GET_ALL_QUERIES
-  })
-
-  return addApolloState(apolloClient, {
-    props: {},
-    revalidate: 1,
-  })
-}
 
 export default function Home() {
   return (

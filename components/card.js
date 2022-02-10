@@ -1,5 +1,5 @@
-// import data from '../data/bug-tracker';
 import { gql, useQuery, NetworkStatus } from '@apollo/client';
+import { initializeApollo, addApolloState } from '../lib/apollo-next-client';
 import styles from './card.module.css';
 import cls from 'classnames';
 
@@ -31,18 +31,8 @@ const Card = () => {
 
   console.log(NetworkStatus);
 
-  const loadingMoreFields = networkStatus === NetworkStatus.fetchMore;
-
-  const loadMoreFields = () => {
-    fetchMore({
-      variables: {
-        skip: allFields.length
-      }
-    });
-  };
-
   if (error) return <ErrorMessage message='Error loading fields.' />;
-  if (loading && !loadingMoreFields) return <div>Loading</div>;
+  if (loading) return <div>Loading</div>;
 
   return (
     <div className={styles.container}>
@@ -95,5 +85,18 @@ const Card = () => {
     </div>
   );
 };
+
+export async function getServerSideProps() {
+  const apolloClient = initializeApollo();
+
+  await apolloClient.query({
+    query: GET_ALL_QUERIES
+  });
+
+  return addApolloState(apolloClient, {
+    props: {},
+    revalidate: 1
+  });
+}
 
 export default Card;

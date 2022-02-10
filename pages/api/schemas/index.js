@@ -1,5 +1,4 @@
 import { gql } from 'apollo-server-micro';
-import { buildSchema } from 'graphql';
 
 export const typeDefs = gql`
   type Fields {
