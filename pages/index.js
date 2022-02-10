@@ -11,6 +11,7 @@ const GET_ALL_QUERIES = gql`
       title
       reporter
       severity
+      status
     }
   }
 `;

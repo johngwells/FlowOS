@@ -11,6 +11,7 @@ const GET_ALL_QUERIES = gql`
       title
       reporter
       severity
+      status
     }
   }
 `;
@@ -24,31 +25,30 @@ const Card = () => {
       // Setting this value to true will make the component rerender when
       // the "networkStatus" changes, so we are able to know if it is fetching
       // more data
-      notifyOnNetworkStatusChange: true,
+      notifyOnNetworkStatusChange: true
     }
-  )
+  );
 
-  console.log(NetworkStatus)
+  console.log(NetworkStatus);
 
-  const loadingMoreFields = networkStatus === NetworkStatus.fetchMore
+  const loadingMoreFields = networkStatus === NetworkStatus.fetchMore;
 
   const loadMoreFields = () => {
     fetchMore({
       variables: {
-        skip: allFields.length,
-      },
-    })
-  }
+        skip: allFields.length
+      }
+    });
+  };
 
-  if (error) return <ErrorMessage message="Error loading fields." />
-  if (loading && !loadingMoreFields) return <div>Loading</div>
+  if (error) return <ErrorMessage message='Error loading fields.' />;
+  if (loading && !loadingMoreFields) return <div>Loading</div>;
 
   return (
     <div className={styles.container}>
       <div className={styles.titleContainer}>
         <img src='static/bug.png' className={styles.bugImg} />
         <h2 className={styles.title}>Bug Reports</h2>
-        
       </div>
       <div className={styles.tableHeading}>
         <span className={cls(styles.borderTitle, styles.tableAlign)}>
@@ -83,7 +83,10 @@ const Card = () => {
               <p>{d.status}</p>
             </div>
             <div className={cls(styles.border, styles.borderSmall)}>
-              <p>{d.devAssigned}</p>
+              <div className={styles.assignedToContainer}>
+                <button className={styles.btn}>Assign</button>
+                <p>{d.devAssigned}</p>
+              </div>
             </div>
           </div>
         );

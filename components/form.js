@@ -6,11 +6,12 @@ import Card from './card';
 // import Card from './card';
 
 const CREATE_BUG = gql`
-  mutation Mutation($title: String!, $reporter: String!, $severity: String!) {
-    createFields(title: $title, reporter: $reporter, severity: $severity) {
+  mutation Mutation($title: String!, $reporter: String!, $severity: String!, $status: String!) {
+    createFields(title: $title, reporter: $reporter, severity: $severity, status: $status) {
       title
       reporter
       severity
+      status
     }
   }
 `;
@@ -21,6 +22,7 @@ const READ_BUG = gql`
       title
       reporter
       severity
+      status
     }
   }
 `;
@@ -31,6 +33,7 @@ const Form = () => {
   const [title, setTitle] = useState('');
   const [reporter, setReporter] = useState('');
   const [severity, setSeverity] = useState('Low');
+  const [status, setStatus] = useState('New');
 
   const [createFields, { data, loading, error }] = useMutation(CREATE_BUG, {
     notifyOnNetworkStatusChange: true,
@@ -49,19 +52,25 @@ const Form = () => {
   };
 
   const handleSeverityChange = e => {
-    const value = [...e.target.selectedOptions].map(option => option.value)
+    const value = [...e.target.selectedOptions].map(option => option.value);
     setSeverity(value.join(''));
-  }
+  };
+
+  const handleStatusChange = e => {
+    const value = [...e.target.selectedOptions].map(option => option.value);
+    setStatus(value.join(''));
+  };
 
   const handleSubmit = e => {
     console.log('Submitted!', title, reporter, severity);
     e.preventDefault();
     createFields({
-      variables: { title, reporter, severity }
+      variables: { title, reporter, severity, status }
     });
 
     // Reset
-    setSeverity('Low')
+    setSeverity('Low');
+    setStatus('New');
     setTitle('');
     setReporter('');
   };
@@ -94,7 +103,13 @@ const Form = () => {
         <option value='Low'>Low</option>
         <option value='Medium'>Medium</option>
         <option value='High'>High</option>
-        <option value='Critical'>Urgent</option>
+        <option value='Critical'>Critical</option>
+      </select>
+      <select defaultValue={status} onChange={handleStatusChange}>
+        <option value='New'>New</option>
+        <option value='Dev Needed'>Dev Needed</option>
+        <option value='In Progress'>In Progress</option>
+        <option value='Completed'>Completed</option>
       </select>
       <button type='submit'>Submit Bug</button>
     </form>

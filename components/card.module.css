@@ -53,9 +53,23 @@
 }
 
 .borderTitle {
-  width: 30%
+  /* width: 30% */
+  width: 30vw;
 }
 
 .borderSmall {
-  width: 15%;
+  /* width: 15%; */
+  width: 15vw;
+}
+
+.assignedToContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
+
+.btn {
+  /* display: flex;
+  justify-content: center; */
 }
