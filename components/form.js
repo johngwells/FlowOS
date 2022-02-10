@@ -4,18 +4,8 @@ import { initializeApollo, addApolloState } from '../lib/apollo-next-client';
 import styles from './form.module.css';
 
 const CREATE_BUG = gql`
-  mutation Mutation(
-    $title: String!
-    $reporter: String!
-    $severity: String!
-    $status: String!
-  ) {
-    createFields(
-      title: $title
-      reporter: $reporter
-      severity: $severity
-      status: $status
-    ) {
+  mutation Mutation($input: FieldsInput!) {
+    createFields(input: $input) {
       title
       reporter
       severity
@@ -73,7 +63,7 @@ const Form = () => {
     console.log('Submitted!', title, reporter, severity);
     e.preventDefault();
     createFields({
-      variables: { title, reporter, severity, status }
+      variables: { input: { title, reporter, severity, status } }
     });
 
     // Reset

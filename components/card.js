@@ -31,7 +31,7 @@ const Card = () => {
 
   console.log(NetworkStatus);
 
-  if (error) return <ErrorMessage message='Error loading fields.' />;
+  if (error) return <div>Error</div>;
   if (loading) return <div>Loading</div>;
 
   return (

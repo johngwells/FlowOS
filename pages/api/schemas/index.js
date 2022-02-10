@@ -18,10 +18,9 @@ export const typeDefs = gql`
     reporter: String!
     severity: String!
     status: String!
-    devAssigned: String 
   }
 
   type Mutation {
-    createFields(title: String!, reporter: String! severity: String! status: String!): Fields!
+    createFields(input: FieldsInput!): Fields
   }
 `

@@ -10,7 +10,7 @@ export const resolvers = {
   Mutation: {
     createFields(parent, args, context, info) {
       console.log({ args });
-      const newTable = args;
+      const newTable = args.input;
 
       fieldsData.push(newTable);
       console.log({ fieldsData });
