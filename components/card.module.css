@@ -42,10 +42,13 @@
 }
 
 .border {
+  display: flex;
+  align-items: center;
   background-color: #4CDAED;
   padding: .5rem;
   margin-right: .3rem;
   margin-bottom: .3rem;
+  height: 3.5rem;
   /* border: 1px solid; */
 }
 

@@ -6,6 +6,7 @@ export const typeDefs = gql`
     id: ID
     title: String!
     reporter: String!
+    severity: String!
   }
 
   type Query {
@@ -15,12 +16,12 @@ export const typeDefs = gql`
   input FieldsInput {
     title: String!
     reporter: String!
-    severity: [String]
+    severity: String!
     status: [String]
     devAssigned: String 
   }
 
   type Mutation {
-    createFields(title: String!, reporter: String!): Fields!
+    createFields(title: String!, reporter: String! severity: String!): Fields!
   }
 `

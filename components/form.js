@@ -6,10 +6,11 @@ import Card from './card';
 // import Card from './card';
 
 const CREATE_BUG = gql`
-  mutation Mutation($title: String!, $reporter: String!) {
-    createFields(title: $title, reporter: $reporter) {
+  mutation Mutation($title: String!, $reporter: String!, $severity: String!) {
+    createFields(title: $title, reporter: $reporter, severity: $severity) {
       title
       reporter
+      severity
     }
   }
 `;
@@ -19,6 +20,7 @@ const READ_BUG = gql`
     fields {
       title
       reporter
+      severity
     }
   }
 `;
@@ -28,6 +30,7 @@ console.log(CREATE_BUG);
 const Form = () => {
   const [title, setTitle] = useState('');
   const [reporter, setReporter] = useState('');
+  const [severity, setSeverity] = useState('Low');
 
   const [createFields, { data, loading, error }] = useMutation(CREATE_BUG, {
     notifyOnNetworkStatusChange: true,
@@ -45,38 +48,54 @@ const Form = () => {
     setReporter(e.target.value);
   };
 
+  const handleSeverityChange = e => {
+    const value = [...e.target.selectedOptions].map(option => option.value)
+    setSeverity(value.join(''));
+  }
+
   const handleSubmit = e => {
-    console.log('Submitted!', title, reporter);
+    console.log('Submitted!', title, reporter, severity);
     e.preventDefault();
     createFields({
-      variables: { title, reporter }
+      variables: { title, reporter, severity }
     });
 
     // Reset
+    setSeverity('Low')
     setTitle('');
     setReporter('');
   };
 
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
-      <label>
+      <label htmlFor='title'>
         Title:
         <input
+          id='title'
           type='text'
           name='title'
           value={title}
+          placeholder='What is your bug?'
           onChange={handleTitleChange}
         />
       </label>
-      <label>
+      <label htmlFor='reporter'>
         Reporter:
         <input
+          id='reporter'
           type='text'
           name='reporter'
           value={reporter}
+          placeholder='Who reported this?'
           onChange={handleReporterChange}
         />
       </label>
+      <select defaultValue={severity} onChange={handleSeverityChange}>
+        <option value='Low'>Low</option>
+        <option value='Medium'>Medium</option>
+        <option value='High'>High</option>
+        <option value='Critical'>Urgent</option>
+      </select>
       <button type='submit'>Submit Bug</button>
     </form>
   );

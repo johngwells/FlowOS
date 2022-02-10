@@ -10,6 +10,7 @@ const GET_ALL_QUERIES = gql`
     fields {
       title
       reporter
+      severity
     }
   }
 `;
