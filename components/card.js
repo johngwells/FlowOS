@@ -1,27 +1,17 @@
-import { gql, useQuery, NetworkStatus } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { initializeApollo, addApolloState } from '../lib/apollo-next-client';
+import { GET_ALL_QUERIES } from '../utils/queries';
+
 import styles from './card.module.css';
 import cls from 'classnames';
 
 import Form from './form';
 
-const GET_ALL_QUERIES = gql`
-  query Query {
-    fields {
-      title
-      reporter
-      severity
-      status
-    }
-  }
-`;
-
 const Card = () => {
-  const { loading, error, data, fetchMore, networkStatus } = useQuery(
+  const { loading, error, data } = useQuery(
     GET_ALL_QUERIES,
     {
       // variables: allPostsQueryVars,
-
       // Setting this value to true will make the component rerender when
       // the "networkStatus" changes, so we are able to know if it is fetching
       // more data
@@ -29,9 +19,7 @@ const Card = () => {
     }
   );
 
-  console.log(NetworkStatus);
-
-  if (error) return <div>Error</div>;
+  if (error) return <div>`Error ${error.message}`</div>;
   if (loading) return <div>Loading</div>;
 
   return (
