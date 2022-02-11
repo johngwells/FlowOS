@@ -1,4 +1,4 @@
-import { uuid } from 'uuidv4';
+import { v4 } from 'uuid';
 const fieldsData = [];
 
 export const resolvers = {
@@ -11,7 +11,7 @@ export const resolvers = {
   Mutation: {
     createFields(parent, args, context, info) {
       console.log({ args })
-      const lastId = uuid();
+      const lastId = v4();
 
       // const newTable = args.input;
       // newTable.id = lastId;
