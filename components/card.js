@@ -18,6 +18,7 @@ const Card = () => {
       notifyOnNetworkStatusChange: true
     }
   );
+  console.log({ data })
 
   if (error) return <div>`Error ${error.message}`</div>;
   if (loading) return <div>Loading</div>;

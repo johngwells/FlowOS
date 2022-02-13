@@ -11,9 +11,10 @@ const Form = () => {
   const [status, setStatus] = useState('New');
   const [isError, setIsError] = useState(false);
 
-  const [createFields, { data, loading, error }] = useMutation(CREATE_BUG, {
+  const [createFields, { data, loading, error }] = useMutation
+  (CREATE_BUG, {
     notifyOnNetworkStatusChange: true,
-    refetchQueries: [{ query: READ_BUG }]
+    // refetchQueries: [{ query: READ_BUG }]
   });
 
   if (loading) return 'Submitting';
