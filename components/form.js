@@ -9,6 +9,7 @@ const Form = () => {
   const [reporter, setReporter] = useState('');
   const [severity, setSeverity] = useState('Low');
   const [status, setStatus] = useState('New');
+  const [isError, setIsError] = useState(false);
 
   const [createFields, { data, loading, error }] = useMutation(CREATE_BUG, {
     notifyOnNetworkStatusChange: true,
@@ -19,6 +20,7 @@ const Form = () => {
   if (error) return `Submission error! ${error.message}`;
 
   const handleTitleChange = e => {
+    setIsError(false);
     setTitle(e.target.value);
   };
 
@@ -38,6 +40,9 @@ const Form = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (title === '' || reporter === '') {
+      return setIsError(true);
+    }
     createFields({
       variables: { input: { title, reporter, severity, status } }
     });
@@ -57,7 +62,7 @@ const Form = () => {
           type='text'
           name='title'
           value={title}
-          placeholder='What is your bug?'
+          placeholder={isError ? 'You must enter a title!' : 'What is your bug?'}
           onChange={handleTitleChange}
         />
       </label>
@@ -67,7 +72,7 @@ const Form = () => {
           type='text'
           name='reporter'
           value={reporter}
-          placeholder='Who reported this?'
+          placeholder={isError ? 'Who reported this bug?' : 'Who reported this?'}
           onChange={handleReporterChange}
         />
       </label>
@@ -97,7 +102,6 @@ export async function getServerSideProps() {
 
   return addApolloState(apolloClient, {
     props: {},
-    revalidate: 1
   });
 }
 

@@ -83,7 +83,7 @@ export async function getServerSideProps() {
 
   return addApolloState(apolloClient, {
     props: {},
-    revalidate: 1
+    revalidate: 1,
   });
 }
 
