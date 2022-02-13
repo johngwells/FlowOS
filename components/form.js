@@ -20,6 +20,7 @@ const Form = () => {
 
   const [createFields, { data, loading, error }] = useMutation(CREATE_BUG, {
     notifyOnNetworkStatusChange: false,
+    // refetchQueries: [{ query: READ_BUG }],
     update: (store, { data }) => {
       const bugData = store.readQuery({
         query: GET_ALL_QUERIES
@@ -63,7 +64,7 @@ const Form = () => {
     }
     createFields({
       variables: { input: { title, reporter, severity, status } },
-    })
+    });
 
     // Reset
     setSeverity('Low');
@@ -119,7 +120,7 @@ export async function getServerSideProps() {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
-    // query: GET_ALL_QUERIES,
+    query: GET_ALL_QUERIES,
     variables: {
       first: POSTS_PER_PAGE,
       after: null
