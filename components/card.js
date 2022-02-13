@@ -7,15 +7,13 @@ import cls from 'classnames';
 
 import Form from './form';
 
+const POSTS_PER_PAGE = 10;
+
 const Card = () => {
   const { loading, error, data } = useQuery(
     GET_ALL_QUERIES,
     {
-      // variables: allPostsQueryVars,
-      // Setting this value to true will make the component rerender when
-      // the "networkStatus" changes, so we are able to know if it is fetching
-      // more data
-      notifyOnNetworkStatusChange: true
+      notifyOnNetworkStatusChange: false
     }
   );
   console.log({ data })
@@ -79,12 +77,15 @@ export async function getServerSideProps() {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
-    query: GET_ALL_QUERIES
+    query: GET_ALL_QUERIES,
+    variables: {
+      first: POSTS_PER_PAGE,
+      after: null
+    }
   });
 
   return addApolloState(apolloClient, {
-    props: {},
-    revalidate: 1,
+    props: {}
   });
 }
 

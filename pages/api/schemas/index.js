@@ -21,6 +21,6 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    createFields(input: FieldsInput!): Fields
+    createFields(input: FieldsInput!): Fields!
   }
 `
