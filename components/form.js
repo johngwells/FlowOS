@@ -1,17 +1,13 @@
 import { useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
-import {
-  initializeApollo,
-  addApolloState,
-  shouldRefetchQuery
-} from '../lib/apollo-next-client';
+import { initializeApollo, addApolloState } from '../lib/apollo-next-client';
 import styles from './form.module.css';
-import { CREATE_BUG, READ_BUG, GET_ALL_QUERIES } from '../utils/queries';
+import cls from 'classnames';
+import { CREATE_BUG, READ_BUG, GET_ALL_QUERIES, DELETE_BUG } from '../utils/queries';
 
 const POSTS_PER_PAGE = 10;
 
 const Form = () => {
-  let input;
   const [title, setTitle] = useState('');
   const [reporter, setReporter] = useState('');
   const [severity, setSeverity] = useState('Low');
@@ -20,19 +16,7 @@ const Form = () => {
 
   const [createFields, { data, loading, error }] = useMutation(CREATE_BUG, {
     notifyOnNetworkStatusChange: false,
-    // refetchQueries: [{ query: READ_BUG }],
-    update: (store, { data }) => {
-      const bugData = store.readQuery({
-        query: GET_ALL_QUERIES
-      });
-
-      store.writeQuery({
-        query: GET_ALL_QUERIES,
-        data: {
-          fields: [...bugData.fields, data.createFields]
-        }
-      });
-    }
+    refetchQueries: [{ query: READ_BUG }]
   });
 
   if (loading) return 'Submitting';
@@ -63,7 +47,7 @@ const Form = () => {
       return setIsError(true);
     }
     createFields({
-      variables: { input: { title, reporter, severity, status } },
+      variables: { input: { title, reporter, severity, status } }
     });
 
     // Reset
@@ -75,8 +59,9 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.container}>
-      <label htmlFor='title'>
+      <label htmlFor='title' className={styles.labelMargin}>
         <input
+          className={styles.input}
           id='title'
           type='text'
           name='title'
@@ -87,8 +72,9 @@ const Form = () => {
           onChange={handleTitleChange}
         />
       </label>
-      <label htmlFor='reporter'>
+      <label htmlFor='reporter' className={styles.labelMargin}>
         <input
+          className={styles.input}
           id='reporter'
           type='text'
           name='reporter'
@@ -99,19 +85,19 @@ const Form = () => {
           onChange={handleReporterChange}
         />
       </label>
-      <select defaultValue={severity} onChange={handleSeverityChange}>
+      <select defaultValue={severity} onChange={handleSeverityChange} className={cls(styles.input, styles.labelMargin)}>
         <option value='Low'>Low</option>
         <option value='Medium'>Medium</option>
         <option value='High'>High</option>
         <option value='Critical'>Critical</option>
       </select>
-      <select defaultValue={status} onChange={handleStatusChange}>
+      <select defaultValue={status} onChange={handleStatusChange} className={cls(styles.input, styles.labelMargin)}>
         <option value='New'>New</option>
         <option value='Dev Needed'>Dev Needed</option>
         <option value='In Progress'>In Progress</option>
         <option value='Completed'>Completed</option>
       </select>
-      <button type='submit'>Submit Bug</button>
+      <button type='submit' className={styles.btn}>Submit Bug</button>
     </form>
   );
 };

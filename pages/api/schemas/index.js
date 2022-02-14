@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-micro';
 
 export const typeDefs = gql`
   type Fields {
-    id: ID
+    id: ID!
     title: String!
     reporter: String!
     severity: String!
@@ -20,7 +20,13 @@ export const typeDefs = gql`
     status: String!
   }
 
+
+  type DeleteField {
+    id: ID
+  }
+
   type Mutation {
     createFields(input: FieldsInput!): Fields!
+    deleteField(id: ID!): String!
   }
-`
+`;

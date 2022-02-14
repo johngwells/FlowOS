@@ -12,6 +12,12 @@ export const GET_ALL_QUERIES = gql`
   }
 `;
 
+export const DELETE_BUG = gql`
+  mutation DeleteField($deleteFieldId: ID!) {
+    deleteField(id: $deleteFieldId)
+  }
+`;
+
 export const CREATE_BUG = gql`
   mutation Mutation($input: FieldsInput!) {
     createFields(input: $input) {

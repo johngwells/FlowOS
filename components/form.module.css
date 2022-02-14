@@ -3,3 +3,28 @@
   justify-content: center;
   margin-top: 2rem;
 }
+
+.labelMargin {
+  margin-right: .3rem;
+}
+
+.input {
+  height: 2rem;
+  background-color: rgba(76, 218, 237, 0.1);
+  border: none;
+}
+
+.input::placeholder {
+  color: black;
+}
+
+.btn {
+  background-color: rgba(76, 218, 237, 0.1);
+  border: none;
+  border-radius: .5rem;
+  width: 15vw;
+}
+
+.btn:hover {
+  background-color: rgba(76, 218, 237, 0.2);
+}

@@ -1,5 +1,6 @@
 /* #FF45F2 */
 /* #4CDAED */
+/* #FDFBF9 */
 
 .titleContainer {
   display: flex;
@@ -20,7 +21,7 @@
 .tableHeading {
   display: flex;
   width: 100vw;
-  margin-left: 4%;
+  margin-left: 5%;
   margin-bottom: 0.5rem;
 }
 
@@ -64,4 +65,35 @@
   align-items: center;
   justify-content: center;
   width: 100vw;
+}
+
+.btn {
+  color: black;
+  background-color: #FDFBF9;
+  border: none;
+  width: 10vw;
+  height: 3vh;
+  border-radius: .5rem;
+}
+
+.btn:hover {
+  box-shadow: .1rem .2rem .2rem rgb(0, 0, 0, .3);
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnDelete {
+  border: none;
+  background-color: rgba(255, 69, 243, 0.2);
+  margin-right: .5rem;
+  height: 2rem;
+  border-radius: .5rem;
+}
+
+.btnDelete:hover {
+  background-color: rgba(255, 69, 243, 0.3)
 }
