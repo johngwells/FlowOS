@@ -88,12 +88,12 @@
 
 .btnDelete {
   border: none;
-  background-color: rgba(255, 69, 243, 0.2);
+  background-color: rgba(255, 69, 243, 0.1);
   margin-right: .5rem;
   height: 2rem;
   border-radius: .5rem;
 }
 
 .btnDelete:hover {
-  background-color: rgba(255, 69, 243, 0.3)
+  background-color: rgba(255, 69, 243, 0.2)
 }

@@ -26,6 +26,10 @@ const Card = () => {
     deleteField({ variables: { deleteFieldId: id } });
   };
 
+  const handleUpdate = id => {
+    // updateField({ variables { }})
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.titleContainer}>
@@ -70,7 +74,7 @@ const Card = () => {
               <p>{d.severity}</p>
             </div>
             <div className={cls(styles.border, styles.borderSmall)}>
-              <p>{d.status}</p>
+              <p onClick={handleUpdate.bind(this, d.id)}>{d.status}</p>
             </div>
             <div className={cls(styles.border, styles.borderSmall)}>
               <div className={styles.assignedToContainer}>

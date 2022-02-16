@@ -20,13 +20,13 @@ export const typeDefs = gql`
     status: String!
   }
 
-
-  type DeleteField {
-    id: ID
+  input UpdateInput {
+    status: String!
   }
 
   type Mutation {
     createFields(input: FieldsInput!): Fields!
     deleteField(id: ID!): String!
+    updateField(id: ID!, input: UpdateInput): Fields!
   }
 `;
