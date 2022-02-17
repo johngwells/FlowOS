@@ -12,9 +12,15 @@ export const GET_ALL_QUERIES = gql`
   }
 `;
 
-export const DELETE_BUG = gql`
-  mutation DeleteField($deleteFieldId: ID!) {
-    deleteField(id: $deleteFieldId)
+export const READ_BUG = gql`
+  query Query {
+    fields {
+      id
+      title
+      reporter
+      severity
+      status
+    }
   }
 `;
 
@@ -29,14 +35,16 @@ export const CREATE_BUG = gql`
   }
 `;
 
-export const READ_BUG = gql`
-  query Query {
-    fields {
-      id
-      title
-      reporter
-      severity
+export const DELETE_BUG = gql`
+  mutation DeleteField($deleteFieldId: ID!) {
+    deleteField(id: $deleteFieldId)
+  }
+`;
+
+export const UPDATE_STATUS = gql`
+  mutation UpdateStatus($updateFieldId: ID!, $input: UpdateInput) {
+    updateField(id: $updateFieldId, input: $input) {
       status
     }
   }
-`;
+`

@@ -1,23 +1,35 @@
+import { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { initializeApollo, addApolloState } from '../lib/apollo-next-client';
-import { DELETE_BUG, READ_BUG, GET_ALL_QUERIES } from '../utils/queries';
+import {
+  DELETE_BUG,
+  READ_BUG,
+  GET_ALL_QUERIES,
+  UPDATE_STATUS
+} from '../utils/queries';
 
 import styles from './card.module.css';
 import cls from 'classnames';
 
 import Form from './form';
+import StatusDropdown from './status-dropdown';
 
 const POSTS_PER_PAGE = 10;
 
 const Card = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState(false);
   const [deleteField, {}] = useMutation(DELETE_BUG, {
     refetchQueries: [{ query: READ_BUG }]
   });
+
   const { loading, error, data } = useQuery(GET_ALL_QUERIES, {
     notifyOnNetworkStatusChange: false
   });
 
-  // console.log({ data })
+  const [updateField, {}] = useMutation(UPDATE_STATUS, {
+    refetchQueries: [{ query: GET_ALL_QUERIES }]
+  });
 
   if (error) return <div>`Error ${error.message}`</div>;
   if (loading) return <div>Loading</div>;
@@ -26,9 +38,19 @@ const Card = () => {
     deleteField({ variables: { deleteFieldId: id } });
   };
 
-  const handleUpdate = id => {
-    // updateField({ variables { }})
-  }
+  const handleOpenDropdown = () => {
+    setIsOpen(true);
+  };
+
+  const handleStatusChange = (id, value) => {
+    console.log({ id, value });
+
+    updateField({
+      variables: { updateFieldId: id, input: { status: value } }
+    });
+
+    setIsOpen(false);
+  };
 
   return (
     <div className={styles.container}>
@@ -74,7 +96,18 @@ const Card = () => {
               <p>{d.severity}</p>
             </div>
             <div className={cls(styles.border, styles.borderSmall)}>
-              <p onClick={handleUpdate.bind(this, d.id)}>{d.status}</p>
+              {isOpen ? (
+                <StatusDropdown
+                  id={d.id}
+                  setIsOpen={setIsOpen}
+                  handleStatusChange={handleStatusChange}
+                  currentStatus={d.status}
+                />
+              ) : (
+                <div onClick={handleOpenDropdown.bind(this, d.id)}>
+                  {d.status}
+                </div>
+              )}
             </div>
             <div className={cls(styles.border, styles.borderSmall)}>
               <div className={styles.assignedToContainer}>
