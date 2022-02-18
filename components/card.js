@@ -40,8 +40,6 @@ const Card = () => {
   };
 
   const handleStatusChange = (id, value) => {
-    console.log({ id, value });
-
     updateField({
       variables: { updateFieldId: id, input: { status: value } }
     });
@@ -49,7 +47,7 @@ const Card = () => {
     setOpen(false);
   };
 
-  const onStatusClick = (index) => {
+  const onStatusClick = index => {
     setMapIndex(index);
     setOpen(true);
   };
@@ -97,16 +95,21 @@ const Card = () => {
             <div className={cls(styles.border, styles.borderSmall)}>
               <p>{d.severity}</p>
             </div>
-            <div className={cls(styles.border, styles.borderSmall)}>
-              <div onClick={onStatusClick.bind(this, index)}>
-                { open && mapIndex === index ? (
-                <StatusDropdown
-                  id={d.id}
-                  setOpen={setOpen}
-                  handleStatusChange={handleStatusChange}
-                  currentStatus={d.status}
-                />
-                ) : ( <span>{d.status}</span> )}
+            <div
+              className={cls(styles.border, styles.borderSmall)}
+              onClick={onStatusClick.bind(this, index)}
+            >
+              <div>
+                {open && mapIndex === index ? (
+                  <StatusDropdown
+                    id={d.id}
+                    setOpen={setOpen}
+                    handleStatusChange={handleStatusChange}
+                    currentStatus={d.status}
+                  />
+                ) : (
+                  <span>{d.status}</span>
+                )}
               </div>
             </div>
             <div className={cls(styles.border, styles.borderSmall)}>
