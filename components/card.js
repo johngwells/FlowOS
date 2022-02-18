@@ -17,9 +17,10 @@ import StatusDropdown from './status-dropdown';
 const POSTS_PER_PAGE = 10;
 
 const Card = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(false);
-  const [deleteField, {}] = useMutation(DELETE_BUG, {
+  const [open, setOpen] = useState(false);
+  const [mapIndex, setMapIndex] = useState(null);
+
+  const [deleteField] = useMutation(DELETE_BUG, {
     refetchQueries: [{ query: READ_BUG }]
   });
 
@@ -27,7 +28,7 @@ const Card = () => {
     notifyOnNetworkStatusChange: false
   });
 
-  const [updateField, {}] = useMutation(UPDATE_STATUS, {
+  const [updateField] = useMutation(UPDATE_STATUS, {
     refetchQueries: [{ query: GET_ALL_QUERIES }]
   });
 
@@ -38,10 +39,6 @@ const Card = () => {
     deleteField({ variables: { deleteFieldId: id } });
   };
 
-  const handleOpenDropdown = () => {
-    setIsOpen(true);
-  };
-
   const handleStatusChange = (id, value) => {
     console.log({ id, value });
 
@@ -49,7 +46,12 @@ const Card = () => {
       variables: { updateFieldId: id, input: { status: value } }
     });
 
-    setIsOpen(false);
+    setOpen(false);
+  };
+
+  const onStatusClick = (index) => {
+    setMapIndex(index);
+    setOpen(true);
   };
 
   return (
@@ -75,7 +77,7 @@ const Card = () => {
           Assigned to
         </span>
       </div>
-      {data?.fields?.map(d => {
+      {data?.fields?.map((d, index) => {
         return (
           <div className={styles.card} key={d.id}>
             <div className={styles.btnContainer}>
@@ -96,18 +98,16 @@ const Card = () => {
               <p>{d.severity}</p>
             </div>
             <div className={cls(styles.border, styles.borderSmall)}>
-              {isOpen ? (
+              <div onClick={onStatusClick.bind(this, index)}>
+                { open && mapIndex === index ? (
                 <StatusDropdown
                   id={d.id}
-                  setIsOpen={setIsOpen}
+                  setOpen={setOpen}
                   handleStatusChange={handleStatusChange}
                   currentStatus={d.status}
                 />
-              ) : (
-                <div onClick={handleOpenDropdown.bind(this, d.id)}>
-                  {d.status}
-                </div>
-              )}
+                ) : ( <span>{d.status}</span> )}
+              </div>
             </div>
             <div className={cls(styles.border, styles.borderSmall)}>
               <div className={styles.assignedToContainer}>

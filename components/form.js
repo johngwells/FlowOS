@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { initializeApollo, addApolloState } from '../lib/apollo-next-client';
 import styles from './form.module.css';
 import cls from 'classnames';
-import { CREATE_BUG, READ_BUG, GET_ALL_QUERIES, DELETE_BUG } from '../utils/queries';
+import { CREATE_BUG, READ_BUG, GET_ALL_QUERIES } from '../utils/queries';
 
 const POSTS_PER_PAGE = 10;
 
