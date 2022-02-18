@@ -79,12 +79,17 @@ const Card = () => {
         return (
           <div className={styles.card} key={d.id}>
             <div className={styles.btnContainer}>
-              <button
+              {/* <button
                 className={styles.btnDelete}
                 onClick={handleDelete.bind(this, d.id)}
               >
                 X
-              </button>
+              </button> */}
+              <img
+                className={styles.btnDelete}
+                src='static/delete_forever.svg'
+                onClick={handleDelete.bind(this, d.id)}
+              />
             </div>
             <div className={cls(styles.border, styles.borderTitle)}>
               <p>{d.title}</p>
