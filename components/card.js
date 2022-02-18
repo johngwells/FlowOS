@@ -104,7 +104,7 @@ const Card = () => {
               className={cls(styles.border, styles.borderSmall)}
               onClick={onStatusClick.bind(this, index)}
             >
-              <div>
+              <>
                 {open && mapIndex === index ? (
                   <StatusDropdown
                     id={d.id}
@@ -115,7 +115,7 @@ const Card = () => {
                 ) : (
                   <span>{d.status}</span>
                 )}
-              </div>
+              </>
             </div>
             <div className={cls(styles.border, styles.borderSmall)}>
               <div className={styles.assignedToContainer}>

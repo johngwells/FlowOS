@@ -44,6 +44,7 @@
 }
 
 .border {
+  color: #FAFAFA;
   display: flex;
   align-items: center;
   background-color: #00CCFE;
@@ -73,7 +74,7 @@
   background-color: #FAFAFA;
   border: none;
   width: 7.5vw;
-  height: 4vh;
+  height: 3.5vh;
   border-radius: .5rem;
   box-shadow: .1rem .2rem .5rem .1rem rgb(0, 0, 0, .3);
   cursor: pointer;
@@ -94,13 +95,12 @@
 
 .btnDelete {
   border: none;
-  /* background-color: rgba(255, 69, 243, 0.1); */
   margin-right: .5rem;
   height: 2rem;
   border-radius: .5rem;
 }
 
 .btnDelete:hover {
-  background-color: rgb(255, 83, 73, .1);
+  background-color: rgb(0, 204, 254, 0.1);
   cursor: pointer;
 }

@@ -10,7 +10,7 @@
 
 .input {
   height: 2rem;
-  background-color: rgba(76, 218, 237, 0.1);
+  background-color: rgb(0, 204, 254, 0.1);
   border: none;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .btn {
-  background-color: rgba(76, 218, 237, 0.1);
+  background-color: rgb(0, 204, 254, 0.1);
   border: none;
   border-radius: .5rem;
   width: 15vw;
@@ -27,7 +27,7 @@
 }
 
 .btn:hover {
-  background-color: rgba(76, 218, 237, 0.2);
+  background-color: rgb(0, 204, 254, 0.2);;
   cursor: pointer;
 }
 
