@@ -1,11 +1,13 @@
 import { ApolloServer } from 'apollo-server-micro';
+import prisma from '../../lib/prisma-client';
 import { typeDefs, schema } from './schemas';
 import { resolvers } from './resolvers';
 import Cors from 'micro-cors';
+import Void from '../../lib/scalar-void';
 
 const cors = Cors();
 
-const apolloServer = new ApolloServer({ typeDefs, resolvers });
+const apolloServer = new ApolloServer({ typeDefs, resolvers, context: { prisma } });
 
 const startServer = apolloServer.start();
 

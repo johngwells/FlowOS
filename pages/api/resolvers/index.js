@@ -1,37 +1,40 @@
-import { v4 } from 'uuid';
-let fieldsData = [];
-
 export const resolvers = {
   Query: {
-    fields(parent, args, context, info) {
-      return fieldsData;
+    fields(_, __, ctx) {
+      return ctx.prisma.fields.findMany();
     }
   },
 
   Mutation: {
-    createFields(parent, args, context, info) {
-      console.log({ args });
-      const lastId = v4();
-
-      const newTable = { id: lastId, ...args.input };
-
-      fieldsData.push(newTable);
-      console.log({ fieldsData });
-
-      return newTable;
+    createFields(parent, args, ctx, info) {
+      return ctx.prisma.fields.create({
+        data: {
+          title: args.input.title,
+          reporter: args.input.reporter,
+          severity: args.input.severity,
+          status: args.input.status
+        }
+      });
     },
-    deleteField: (_, { id }) => {
-      console.log(id);
-      fieldsData = fieldsData.filter(field => field.id !== id);
-      console.log({ fieldsData });
-      return id;
+    deleteField: (_, { id }, ctx, info) => {
+      return ctx.prisma.fields.delete({
+        where: {
+          id: Number(id)
+        },
+        select: {
+          id: true
+        }
+      });
     },
-    updateField: (_, { id, input }) => {
-      const existingField = fieldsData.find(field => field.id === id);
-      existingField.status = input.status;
-
-      console.log({ fieldsData });
-      return existingField;
+    updateField: (_, { id, input }, ctx) => {
+      return ctx.prisma.fields.update({
+        where: {
+          id: Number(id)
+        },
+        data: {
+          status: input.status
+        }
+      })
     }
   }
 };

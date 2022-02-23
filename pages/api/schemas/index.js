@@ -1,4 +1,5 @@
 import { gql } from 'apollo-server-micro';
+import Void from '../../../lib/scalar-void';
 
 export const typeDefs = gql`
   type Fields {
@@ -8,6 +9,8 @@ export const typeDefs = gql`
     severity: String!
     status: String!
   }
+
+  scalar Void
 
   type Query {
     fields: [Fields]!
@@ -26,7 +29,7 @@ export const typeDefs = gql`
 
   type Mutation {
     createFields(input: FieldsInput!): Fields!
-    deleteField(id: ID!): String!
+    deleteField(id: ID!): Void
     updateField(id: ID!, input: UpdateInput): Fields!
   }
 `;
