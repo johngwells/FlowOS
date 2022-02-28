@@ -1,4 +1,4 @@
-import styles from './form.module.css';
+import styles from './dropdown.module.css';
 import cls from 'classnames';
 
 const SeverityDropdown = ({

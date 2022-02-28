@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.labelMargin {
+  margin-right: .3rem;
+}
+
+.input {
+  font-family: Montserrat;
+  font-size: 1rem;
+  background-color: rgb(0, 204, 254, 0.1);
+  color: #FAFAFA;
+  height: 2rem;
+  border: none;
+}
+
+.input:focus {
+  outline: none;
+}

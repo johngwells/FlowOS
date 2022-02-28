@@ -1,4 +1,4 @@
-import styles from './form.module.css';
+import styles from './dropdown.module.css';
 import cls from 'classnames';
 
 const StatusDropdown = ({ id, currentStatus, setOpen, handleStatusChange }) => {
@@ -14,7 +14,7 @@ const StatusDropdown = ({ id, currentStatus, setOpen, handleStatusChange }) => {
   };
 
   return (
-    // <form>
+    <form>
       <select
         value={currentStatus}
         onChange={handleStatus}
@@ -29,7 +29,7 @@ const StatusDropdown = ({ id, currentStatus, setOpen, handleStatusChange }) => {
         <option value='In Progress'>In Progress</option>
         <option value='Completed'>Completed</option>
       </select>
-    // </form>
+    </form>
   );
 };
 

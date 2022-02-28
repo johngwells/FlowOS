@@ -9,16 +9,24 @@
 }
 
 .input {
+  font-family: Montserrat;
+  font-size: 1rem;
+  color: gray;
   height: 2rem;
   background-color: rgb(0, 204, 254, 0.1);
   border: none;
 }
 
 .input::placeholder {
-  color: black;
+  color: gray;
+}
+
+.input:focus {
+  outline: none;
 }
 
 .btn {
+  color: gray;
   background-color: rgb(0, 204, 254, 0.1);
   border: none;
   border-radius: .5rem;
