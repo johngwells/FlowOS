@@ -32,7 +32,8 @@ export const resolvers = {
           id: Number(id)
         },
         data: {
-          status: input.status
+          status: input.status,
+          severity: input.severity
         }
       })
     }

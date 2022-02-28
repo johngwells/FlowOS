@@ -24,7 +24,8 @@ export const typeDefs = gql`
   }
 
   input UpdateInput {
-    status: String!
+    status: String
+    severity: String
   }
 
   type Mutation {

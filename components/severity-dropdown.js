@@ -1,36 +1,40 @@
 import styles from './form.module.css';
 import cls from 'classnames';
 
-const StatusDropdown = ({ id, currentStatus, setOpen, handleStatusChange }) => {
+const SeverityDropdown = ({
+  id,
+  currentStatus,
+  setSeverityOpen,
+  handleSeverityChange
+}) => {
   const handleStatus = e => {
     const statusValue = [...e.target.selectedOptions].map(
       option => option.value
     );
     const value = statusValue.join('');
 
-    handleStatusChange(id, value);
+    handleSeverityChange(id, value);
 
-    setOpen(false);
+    setSeverityOpen(false);
   };
 
   return (
-    // <form>
+    <form>
       <select
         value={currentStatus}
         onChange={handleStatus}
         className={cls(styles.input, styles.labelMargin)}
       >
         <option value={currentStatus} disabled={true}>
-          Select Status
+          Select Severity
         </option>
-
-        <option value='New'>New</option>
-        <option value='Dev Needed'>Dev Needed</option>
-        <option value='In Progress'>In Progress</option>
-        <option value='Completed'>Completed</option>
+        <option value='Low'>Low</option>
+        <option value='Mid'>Mid</option>
+        <option value='High'>High</option>
+        <option value='Critical'>Critical</option>
       </select>
-    // </form>
+    </form>
   );
 };
 
-export default StatusDropdown;
+export default SeverityDropdown;

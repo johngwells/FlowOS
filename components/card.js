@@ -13,12 +13,16 @@ import cls from 'classnames';
 
 import Form from './form';
 import StatusDropdown from './status-dropdown';
+import SeverityDropdown from './severity-dropdown';
 
 const POSTS_PER_PAGE = 10;
 
 const Card = () => {
   const [open, setOpen] = useState(false);
   const [mapIndex, setMapIndex] = useState(null);
+
+  const [severityOpen, setSeverityOpen] = useState(false);
+  const [mapSeverityIndex, setMapSeverityIndex] = useState(null);
 
   const [deleteField] = useMutation(DELETE_BUG, {
     refetchQueries: [{ query: READ_BUG }]
@@ -47,9 +51,21 @@ const Card = () => {
     setOpen(false);
   };
 
+  const handleSeverityChange = (id, value) => {
+    updateField({
+      variables: { updateFieldId: id, input: { severity: value } }
+    });
+    setSeverityOpen(false);
+  };
+
   const onStatusClick = index => {
     setMapIndex(index);
     setOpen(true);
+  };
+
+  const onSeverityClick = index => {
+    setMapSeverityIndex(index);
+    setSeverityOpen(true);
   };
 
   return (
@@ -91,14 +107,29 @@ const Card = () => {
             <div className={cls(styles.border, styles.borderSmall)}>
               <p>{d.reporter}</p>
             </div>
-            <div className={cls(styles.border, styles.borderSmall)}>
-              <p>{d.severity}</p>
+            <div
+              className={cls(styles.border, styles.borderSmall)}
+              onClick={onSeverityClick.bind(this, index)}
+            >
+              <>
+                {severityOpen && mapSeverityIndex === index ? (
+                  <SeverityDropdown
+                    id={d.id}
+                    setSeverityOpen={setSeverityOpen}
+                    handleSeverityChange={handleSeverityChange}
+                    currentStatus={d.severity}
+                  />
+                ) : (
+                  <span>{d.severity}</span>
+                )}
+              </>
             </div>
             <div
               className={cls(styles.border, styles.borderSmall)}
               onClick={onStatusClick.bind(this, index)}
             >
               <>
+                {/* Setting an Index to the cell & comparing to the current index of that row. Fixes the problem of opening all cells in the column */}
                 {open && mapIndex === index ? (
                   <StatusDropdown
                     id={d.id}
