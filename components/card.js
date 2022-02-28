@@ -58,15 +58,19 @@ const Card = () => {
     setSeverityOpen(false);
   };
 
-  const onStatusClick = index => {
+  const handleStatusClick = index => {
     setMapIndex(index);
     setOpen(true);
   };
 
-  const onSeverityClick = index => {
+  const handleSeverityClick = index => {
     setMapSeverityIndex(index);
     setSeverityOpen(true);
   };
+
+  const handleAssignClick = () => {
+    alert('Must be logged in as Admin to assign a dev')
+  }
 
   return (
     <div className={styles.container}>
@@ -109,7 +113,7 @@ const Card = () => {
             </div>
             <div
               className={cls(styles.border, styles.borderSmall)}
-              onClick={onSeverityClick.bind(this, index)}
+              onClick={handleSeverityClick.bind(this, index)}
             >
               <>
                 {severityOpen && mapSeverityIndex === index ? (
@@ -126,7 +130,7 @@ const Card = () => {
             </div>
             <div
               className={cls(styles.border, styles.borderSmall)}
-              onClick={onStatusClick.bind(this, index)}
+              onClick={handleStatusClick.bind(this, index)}
             >
               <>
                 {/* Setting an Index to the cell & comparing to the current index of that row. Fixes the problem of opening all cells in the column */}
@@ -144,7 +148,7 @@ const Card = () => {
             </div>
             <div className={cls(styles.border, styles.borderSmall)}>
               <div className={styles.assignedToContainer}>
-                <button className={styles.btn}>Assign</button>
+                <button onClick={handleAssignClick} className={styles.btn}>Assign</button>
                 <p>{d.devAssigned}</p>
               </div>
             </div>
